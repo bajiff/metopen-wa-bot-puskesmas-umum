@@ -24,31 +24,31 @@ const logResearchData = (question, answer, duration) => {
     fs.appendFileSync(LOG_FILE, row);
 };
 
-// --- 3. LOAD DATABASE SEKOLAH (SEKALI SAJA DI AWAL) ---
+// --- 3. LOAD DATABASE PUSKESMAS (SEKALI SAJA DI AWAL) ---
 // Kita baca file ini SEBELUM bot nyala. Data akan disimpan di RAM.
-let SCHOOL_DATA_CONTEXT = "";
+let PUSKESMAS_DATA_CONTEXT = "";
 
 try {
-    console.log("📂 Membaca Database Sekolah...");
-    const rawData = fs.readFileSync('data-sekolah.json', 'utf8');
+    console.log("📂 Membaca Database Puskesmass...");
+    const rawData = fs.readFileSync('data-puskesmas-umum.json', 'utf8');
     const jsonData = JSON.parse(rawData);
     // Kita stringify di awal biar tidak perlu proses ulang tiap ada chat
-    SCHOOL_DATA_CONTEXT = JSON.stringify(jsonData, null, 2);
+    PUSKESMAS_DATA_CONTEXT = JSON.stringify(jsonData, null, 2);
     console.log("✅ Database berhasil dimuat ke Memory!");
 } catch (error) {
-    console.error("❌ FATAL ERROR: Gagal membaca data-sekolah.json");
+    console.error("❌ FATAL ERROR: Gagal membaca data-puskesmas-umum.json");
     console.error("Pastikan file ada dan format JSON benar.");
     process.exit(1); // Matikan program karena database wajib ada
 }
 
 // --- 4. SYSTEM INSTRUCTION (Prompt Dasar) ---
 const SYSTEM_INSTRUCTION = `
-PERAN: Anda adalah "Meki", Asisten Digital Cerdas dari SMA Negeri 1 Baji Ajalah.
+PERAN: Anda adalah "WaPusU", Asisten Digital Cerdas dari Puskesmas Umum.
 
 TUGAS UTAMA:
 1. Jika User menyapa (Halo/P/Assalamualaikum) -> Berikan salam pembuka dan tawarkan bantuan.
 2. Jika User bertanya -> Jawab berdasarkan DATA JSON yang dilampirkan.
-3. Greeting: Halo 👋! Saya Meki, Chatbot SMA Negeri 1 Baji Ajalah. Saya siap membantu Anda dengan informasi seputar administrasi sekolah dan berikan point-point yang bisa anda jelaskan agar user tidak bingung untuk bertanya.
+3. Greeting: Halo 👋! Saya WaPusU, Chatbot WhatsApp Puskesmas Umum. Saya siap membantu Anda dengan informasi seputar Informasi dan berikan point-point yang bisa anda jelaskan agar user tidak bingung untuk bertanya.
 
 ATURAN FORMAT & GAYA BAHASA:
 1. Gunakan Bahasa Indonesia formal, ramah, dan solutif.
@@ -61,7 +61,7 @@ ATURAN FORMAT & GAYA BAHASA:
 BATASAN (STRICT):
 - JANGAN MENGARANG / HALUSINASI. Jawaban harus 100% bersumber dari DATA JSON.
 - Jika data tidak ditemukan, JANGAN menebak. Jawablah persis dengan kalimat ini:
-  "🤖 Mohon maaf, informasi tersebut belum tersedia dalam sistem kami. Silakan hubungi Tata Usaha (Pak Cholam) di 0855-1234-4321 untuk informasi lebih lanjut."
+  "🤖 Mohon maaf, informasi tersebut belum tersedia dalam sistem kami. Silakan hubungi Admin (Pak Mey) di 0855-2222-4321 untuk informasi lebih lanjut."
 `;
 
 // --- 5. SETUP CLIENT ---
@@ -99,14 +99,14 @@ client.on('message', async msg => {
         await chat.sendStateTyping();
 
         // ❌ Kita TIDAK membaca file di sini lagi.
-        // ✅ Kita pakai SCHOOL_DATA_CONTEXT yang sudah dimuat di atas.
+        // ✅ Kita pakai PUSKESMAS_DATA_CONTEXT yang sudah dimuat di atas.
 
         // Gabungkan Prompt
         const prompt = `
         ${SYSTEM_INSTRUCTION}
 
-        === DATA SEKOLAH (SUMBER KEBENARAN) ===
-        ${SCHOOL_DATA_CONTEXT}
+        === DATA PUSKESMAS UMUM (SUMBER KEBENARAN) ===
+        ${PUSKESMAS_DATA_CONTEXT}
         =======================================
 
         PERTANYAAN USER: "${msg.body}"
