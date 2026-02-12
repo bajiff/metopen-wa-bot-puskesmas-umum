@@ -9,7 +9,7 @@
     "wilayah_kerja": ["Kelurahan Baji Ajalah", "Desa Baji Infokan", "Desa Baji Smart Jaya"],
     "moto": "Sehatmu, Prioritas Kami"
   },
-  "statistik_layanan": {
+  "statistik": {
     "total_kunjungan_harian": 150,
     "kapasitas_rawat_inap": {
       "total_bed": 15,
@@ -28,9 +28,9 @@
   },
   "jadwal_pelayanan": {
     "pendaftaran_loket": {
-      "senin_kamis": "07.30 - 11.00 WIB",
-      "jumat": "07.30 - 10.00 WIB",
-      "sabtu": "07.30 - 10.30 WIB"
+      "senin_kamis": "07.30 - 12.00 WIB",
+      "jumat": "07.30 - 11.00 WIB",
+      "sabtu": "07.30 - 12.30 WIB"
     },
     "ugd_dan_persalinan": "24 Jam (Setiap Hari)",
     "jadwal_khusus": {
@@ -42,8 +42,8 @@
   "alur_pendaftaran": {
     "syarat_dokumen": {
       "pasien_baru": [
-        "KTP / KK (Asli & Fotokopi)",
-        "Kartu KIS / BPJS (Jika ada)"
+        "KTP / KK (Asli & Fotokopi masing-masing 3x)",
+        "Kartu KIS / BPJS (Opsional masing-masing 3x)"
       ],
       "pasien_lama": [
         "Kartu Berobat Puskesmas",
@@ -60,7 +60,7 @@
       "1. Periksa di Poli Puskesmas",
       "2. Dokter memberikan indikasi medis",
       "3. Input data ke P-Care BPJS",
-      "4. Pasien menerima Surat Rujukan ke RS Tipe C/D"
+      "4. Pasien menerima Surat Rujukan ke RS Sesuai Tipe"
     ]
   },
   "daftar_poli_layanan": {
