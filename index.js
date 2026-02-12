@@ -101,9 +101,10 @@ client.on('message', async msg => {
         const chat = await msg.getChat();
 
         // === FILTER GROUP CHAT (REVISI PENTING) ===
-        // Jika pesan dari GRUP dan bot TIDAK di-mention, maka ABAIKAN.
-        if (chat.isGroup && !msg.mentionedIds.includes(client.info.wid._serialized)) {
-            return; // Bot diam (exit function)
+        if (chat.isGroup) {
+            // Opsional: Log ke console agar kita tahu ada yang mencoba
+            console.log(`[BLOCKED] Group Chat terdeteksi dari ${msg.from}. Mengabaikan.`);
+            return; // STOP DI SINI. Jangan proses apapun.
         }
         // ===========================================
 
