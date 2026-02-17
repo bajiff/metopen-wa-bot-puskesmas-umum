@@ -11,7 +11,7 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 // Menggunakan model sesuai permintaan (Lite/Flash)
 const model = genAI.getGenerativeModel({ 
-    model: "gemini-flash-lite-latest", //  DO NOT CHANGE
+    model: "gemini-flash-lite-late", //  DO NOT CHANGE
     generationConfig: {
         temperature: 0.3,       
         maxOutputTokens: 800,   
